@@ -10,10 +10,9 @@ def get_feature_ranges(X: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: 2d array of ranges. First dimension corresponds to each feature. 2nd dimension contains min and max values for the range
     """
-    feature_count = X.shape[0]
+    feature_count = X.shape[1]
 
     feature_ranges = np.ndarray(shape=(feature_count, 2), dtype=X.dtype)
-
     feature_ranges[:, 0] = np.min(X, axis=0)
     feature_ranges[:, 1] = np.max(X, axis=0)
 
@@ -43,13 +42,12 @@ def configure_feature_windows(feature_ranges: np.ndarray, s: int) -> list[np.nda
 def clip_instances_to_feature_windows(
     X: np.ndarray, feature_windows: list[np.ndarray], feature_ranges: np.ndarray
 ):
-    feature_count = X.shape[0]
-
+    feature_count = X.shape[1]
     # first ensure instance values are in correct ranges,
     # as provided by feature ranges
     for feature in range(feature_count):
-        X[feature, :] = np.clip(
-            X[feature],
+        X[:, feature] = np.clip(
+            X[:, feature],
             a_min=feature_ranges[feature][0],
             a_max=feature_ranges[feature][1],
         )
@@ -57,8 +55,8 @@ def clip_instances_to_feature_windows(
     # resultant_X = np.zeros_like(X, dtype=np.integer)
     # now use numpy digitize to perform binning into feature windows
     for feature in range(feature_count):
-        X[feature, :] = np.digitize(
-            x=X[feature, :], bins=feature_windows[feature], right=False
+        X[:, feature] = np.digitize(
+            x=X[:, feature], bins=feature_windows[feature], right=False
         )
 
     return X

@@ -27,7 +27,7 @@ class InterpolatedValueDistanceMetric(BaseEstimator, ClassifierMixin):
     def get_distance(self, ins_1, ins_2):
         distance_metric = partial(get_delta_nd, self.cond_proba, norm=self.norm)
 
-        distance_metric(ins_1=ins_1, ins_2=ins_2).sum() ** (1 / self.norm)
+        return distance_metric(ins_1=ins_1, ins_2=ins_2).sum() ** (1 / self.norm)
 
     def fit(self, X, y):
         X, y = check_X_y(X, y)
@@ -73,8 +73,7 @@ class InterpolatedValueDistanceMetric(BaseEstimator, ClassifierMixin):
             feature_windows=self.feature_windows,
             feature_ranges=self.feature_ranges,
         )
-        print(f"in predict")
-        print(X)
+        # print(X)
         # now query VDM
 
         return self.knn_.predict(X)
