@@ -391,15 +391,20 @@ version = "0.0.1"
 description = "Use Value Difference Metric to find distance between categorical features"
 optional = false
 python-versions = "*"
-files = [
-    {file = "vdm3-0.0.1.tar.gz", hash = "sha256:7feb1a297008fcfac0e43b2af5a34cc37b5a822ac349054e65ee034e7f6249c0"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 numpy = "*"
 pandas = "*"
 
+[package.source]
+type = "git"
+url = "git@github.com:alexdlukens/vdm3.git"
+reference = "develop"
+resolved_reference = "429f72a1efcae7c6ca73406972ff6452da18b0e4"
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "ddf8b2484a4b34dcc4bb8d224e41de1ab22328ba48bf220d0be9c8fc502342e4"
+content-hash = "4bf641e958e7564fb1e03879137b6203c45fcede8cc62148c91f0af415c86b69"

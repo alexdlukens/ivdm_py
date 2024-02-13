@@ -54,6 +54,7 @@ def clip_instances_to_feature_windows(
             a_max=feature_ranges[feature][1],
         )
 
+    # resultant_X = np.zeros_like(X, dtype=np.integer)
     # now use numpy digitize to perform binning into feature windows
     for feature in range(feature_count):
         X[feature, :] = np.digitize(

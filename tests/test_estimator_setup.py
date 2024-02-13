@@ -3,7 +3,7 @@ from ivdm_py import InterpolatedValueDistanceMetric
 
 
 def test_setup():
-    ivdm_metric = InterpolatedValueDistanceMetric(s=5)
+    ivdm_metric = InterpolatedValueDistanceMetric(s=5, n_neighbors=2, norm=2)
 
     test_data = np.zeros((3, 3))
     test_data[0] = [1.2, 2, 3]
@@ -29,3 +29,5 @@ def test_setup():
         assert len(ivdm_metric.feature_windows[feature]) == ivdm_metric.s
 
     assert np.allclose(ivdm_metric.X_transformed[0], [2, 3, 4])
+
+    assert np.allclose(ivdm_metric.predict(np.array([[1, 1.9, 2.9]])), 1)
