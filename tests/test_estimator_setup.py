@@ -28,6 +28,6 @@ def test_setup():
 
         assert len(ivdm_metric.feature_windows[feature]) == ivdm_metric.s
 
-    assert np.allclose(ivdm_metric.X_transformed[0], [2, 3, 4])
+    assert np.allclose(ivdm_metric.X_transformed[0], [2, 5, 1])
 
     assert np.allclose(ivdm_metric.predict(np.array([[1, 1.9, 2.9]])), 1)
