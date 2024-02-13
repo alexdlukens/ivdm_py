@@ -10,7 +10,7 @@ python = "^3.10"
 scikit-learn = "^1.4.0"
 numpy = "^1.26.4"
 pandas = "^2.2.0"
-vdm3 = {git = "git@github.com:alexdlukens/vdm3.git", rev = "develop"}
+vdm3 = {git = "https://github.com/alexdlukens/vdm3.git", rev = "develop"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"

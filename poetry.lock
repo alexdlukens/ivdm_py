@@ -400,11 +400,11 @@ pandas = "*"
 
 [package.source]
 type = "git"
-url = "git@github.com:alexdlukens/vdm3.git"
+url = "https://github.com/alexdlukens/vdm3.git"
 reference = "develop"
 resolved_reference = "429f72a1efcae7c6ca73406972ff6452da18b0e4"
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "600de79bb3db4d8f35efb0fba896c65c5546407541547f59065263ad8d687e75"
+content-hash = "0449ba43098ef94cd9bf94abf9ff7d5edc994d9069c6af09a709aaf8b8f77b53"
