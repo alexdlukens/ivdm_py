@@ -392,17 +392,19 @@ description = "Use Value Difference Metric to find distance between categorical 
 optional = false
 python-versions = "*"
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
 numpy = "*"
 pandas = "*"
 
 [package.source]
-type = "directory"
-url = "third_party/vdm3"
+type = "git"
+url = "https://github.com/alexdlukens/vdm3.git"
+reference = "develop"
+resolved_reference = "429f72a1efcae7c6ca73406972ff6452da18b0e4"
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "379d05ac4183a1eeddabfa50943848e10253221ef026ad9cbc8c131513889972"
+content-hash = "0449ba43098ef94cd9bf94abf9ff7d5edc994d9069c6af09a709aaf8b8f77b53"
