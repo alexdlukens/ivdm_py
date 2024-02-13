@@ -1,4 +1,3 @@
-import numpy as np
 from ivdm_py import InterpolatedValueDistanceMetric
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -22,3 +21,4 @@ def test_iris():
     precision = precision_score(y_true=y_test, y_pred=predictions, average="micro")
 
     assert accuracy == 0.98
+    assert precision == 0.98
