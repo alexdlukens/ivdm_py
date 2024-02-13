@@ -3,7 +3,11 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils.multiclass import unique_labels
 from sklearn.utils.validation import check_array, check_is_fitted, check_X_y
 
-from ivdm_py.components import configure_feature_windows, get_feature_ranges
+from ivdm_py.components import (
+    configure_feature_windows,
+    get_feature_ranges,
+    clip_instances_to_feature_windows,
+)
 
 
 class InterpolatedValueDistanceMetric(BaseEstimator, ClassifierMixin):
@@ -21,9 +25,17 @@ class InterpolatedValueDistanceMetric(BaseEstimator, ClassifierMixin):
         self.y_ = y
 
         self.feature_ranges = get_feature_ranges(X)
-        self.feature_spaces = configure_feature_windows(
+        self.feature_windows = configure_feature_windows(
             feature_ranges=self.feature_ranges, s=self.s
         )
+
+        self.X_transformed = clip_instances_to_feature_windows(
+            X=X,
+            feature_windows=self.feature_windows,
+            feature_ranges=self.feature_ranges,
+        )
+
+        # now ready to perform VDM algorithm on data
 
         return self
 
@@ -31,5 +43,13 @@ class InterpolatedValueDistanceMetric(BaseEstimator, ClassifierMixin):
         check_is_fitted(self)
 
         X = check_array(X)
+
+        X = clip_instances_to_feature_windows(
+            X=X,
+            feature_windows=self.feature_windows,
+            feature_ranges=self.feature_ranges,
+        )
+
+        # now query VDM
 
         return None

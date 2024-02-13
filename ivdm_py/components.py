@@ -20,7 +20,7 @@ def get_feature_ranges(X: np.ndarray) -> np.ndarray:
     return feature_ranges
 
 
-def configure_feature_windows(feature_ranges: np.ndarray, s: int):
+def configure_feature_windows(feature_ranges: np.ndarray, s: int) -> list[np.ndarray]:
     """Determine the regions for the feature ranges based on the configured number of intervals
 
     Args:
@@ -38,3 +38,26 @@ def configure_feature_windows(feature_ranges: np.ndarray, s: int):
         feature_windows.append(feature_space)
 
     return feature_windows
+
+
+def clip_instances_to_feature_windows(
+    X: np.ndarray, feature_windows: list[np.ndarray], feature_ranges: np.ndarray
+):
+    feature_count = X.shape[0]
+
+    # first ensure instance values are in correct ranges,
+    # as provided by feature ranges
+    for feature in range(feature_count):
+        X[feature, :] = np.clip(
+            X[feature],
+            a_min=feature_ranges[feature][0],
+            a_max=feature_ranges[feature][1],
+        )
+
+    # now use numpy digitize to perform binning into feature windows
+    for feature in range(feature_count):
+        X[feature, :] = np.digitize(
+            x=X[feature, :], bins=feature_windows[feature], right=False
+        )
+
+    return X

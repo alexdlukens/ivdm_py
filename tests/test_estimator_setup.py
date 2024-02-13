@@ -6,7 +6,7 @@ def test_setup():
     ivdm_metric = InterpolatedValueDistanceMetric(s=5)
 
     test_data = np.zeros((3, 3))
-    test_data[0] = [1, 2, 3]
+    test_data[0] = [1.2, 2, 3]
     test_data[1] = [4, 2, 4]
     test_data[2] = [0, 2, 100]
 
@@ -19,11 +19,13 @@ def test_setup():
     # check computed feature spaces to ensure
     # they are compliant with min and max values
     for feature in range(test_data.shape[0]):
-        assert np.min(ivdm_metric.feature_spaces[feature]) == np.min(
+        assert np.min(ivdm_metric.feature_windows[feature]) == np.min(
             ivdm_metric.feature_ranges[feature]
         )
-        assert np.max(ivdm_metric.feature_spaces[feature]) == np.max(
+        assert np.max(ivdm_metric.feature_windows[feature]) == np.max(
             ivdm_metric.feature_ranges[feature]
         )
 
-        assert len(ivdm_metric.feature_spaces[feature]) == ivdm_metric.s
+        assert len(ivdm_metric.feature_windows[feature]) == ivdm_metric.s
+
+    assert np.allclose(ivdm_metric.X_transformed[0], [2, 3, 4])
