@@ -1,0 +1,3 @@
+[submodule "third_party/vdm3"]
+	path = third_party/vdm3
+	url = git@github.com:alexdlukens/vdm3.git
